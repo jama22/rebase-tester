@@ -3,12 +3,11 @@ options:
   pool: {}
 projectId: jscma-gcf-test
 steps:
+- name: rebase
 - args:
-  - build
-  - us-east1-docker.pkg.dev/jscma-gcf-test/cloud-run-source-deploy/rebase-app
-  - --network
-  - cloudbuild
-  - --builder
-  - gcr.io/buildpacks/builder
+  - rebase
+  - --run-image 
+  - gcr.io/buildpacks/builder:google-22
+  - --publish
   entrypoint: pack
   name: gcr.io/k8s-skaffold/pack
