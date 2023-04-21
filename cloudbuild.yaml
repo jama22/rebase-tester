@@ -7,7 +7,7 @@ steps:
   - rebase
   - us-east1-docker.pkg.dev/jscma-gcf-test/cloud-run-source-deploy/rebase-app
   - --run-image
-  - gcr.io/buildpacks/gcp/run:latest
+  - gcr.io/buildpacks/google-22/run:latest
   - --publish
   entrypoint: pack
   name: gcr.io/k8s-skaffold/pack
