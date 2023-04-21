@@ -1,0 +1,14 @@
+options:
+  logging: LEGACY
+  pool: {}
+projectId: jscma-gcf-test
+steps:
+- args:
+  - build
+  - us-east1-docker.pkg.dev/jscma-gcf-test/cloud-run-source-deploy/rebase-app
+  - --network
+  - cloudbuild
+  - --builder
+  - gcr.io/buildpacks/builder
+  entrypoint: pack
+  name: gcr.io/k8s-skaffold/pack
