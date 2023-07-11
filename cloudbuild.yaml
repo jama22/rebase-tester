@@ -1,23 +1,15 @@
 options:
-  logging: LEGACY
+  logging: CLOUD_LOGGING_ONLY
   pool: {}
-projectId: jscma-gcf-test
+projectId: $PROJECT_ID
 steps:
 - name: gcr.io/k8s-skaffold/pack
   entrypoint: pack
   args:
-  - rebase
-  - us-central1-docker.pkg.dev/jscma-gcf-test/app-repos/rebase-app
-  - --run-image
-  - gcr.io/buildpacks/google-22/run:latest
-  - --publish
-- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-  entrypoint: gcloud
-  args:
-   - 'run'
-   - 'deploy'
-   - 'rebase-app'
-   - '--image'
-   - us-central1-docker.pkg.dev/jscma-gcf-test/app-repos/rebase-app
-   - '--region'
-   - us-east1
+  - build
+  - us-central1-docker.pkg.dev/$PROJECT_ID/app-repos/gcp-buildpack-fast-app
+  - --builder
+  - gcr.io/buildpacks/builder:latest
+  - --cache-image
+  - us-central1-docker.pkg.dev/$PROJECT_ID/app-repos/gcp-buildpack-cache-test:latest
+  - --publish 
